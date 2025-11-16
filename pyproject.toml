@@ -9,3 +9,13 @@ dependencies = []
 [project.urls]
 Homepage = "https://www.azurops.com"
 Repository = "https://github.com/azurops/website"
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=3.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "html-validate>=0.1.0",
+    "css-validator>=0.1.0",
+    "link-checker>=0.1.0"
+]
