@@ -1,0 +1,64 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run HTML validation
+        run: npx html-validate ./index.html
+
+      - name: Run CSS validation
+        run: npx css-validator --file styles.css
+
+      - name: Check for broken links
+        run: npx link-checker --url file://$(pwd)/index.html
+
+      - name: Validate HTML structure
+        run: |
+          if command -v tidy >/dev/null 2>&1; then
+            tidy -e index.html 2>&1 | grep -q "No warnings or errors were found" || exit 1
+          else
+            echo "Installing tidy"
+            sudo apt-get update && sudo apt-get install -y tidy
+            tidy -e index.html 2>&1 | grep -q "No warnings or errors were found" || exit 1
+          fi
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

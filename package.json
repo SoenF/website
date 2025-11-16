@@ -1,0 +1,30 @@
+{
+  "name": "azurops-website",
+  "version": "1.0.0",
+  "description": "Official website for AZUROPS - Business Automation & AI Solutions",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx prettier --check . && npx html-validate .",
+    "format": "npx prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azurops/website.git"
+  },
+  "keywords": [
+    "azurops",
+    "automation",
+    "ai",
+    "solutions",
+    "business"
+  ],
+  "author": "AZUROPS",
+  "license": " proprietary",
+  "devDependencies": {
+    "html-validate": "^8.0.0",
+    "prettier": "^3.0.0",
+    "css-validator": "^0.12.0",
+    "link-checker": "^1.4.0"
+  }
+}
