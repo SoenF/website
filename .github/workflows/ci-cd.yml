@@ -22,16 +22,19 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: ./
+        working-directory: ./ # <-- utilise la racine du repo
 
       - name: Run HTML validation
         run: npx html-validate ./index.html
+        working-directory: ./ # <-- racine
 
       - name: Run CSS validation
         run: npx css-validator --file styles.css
+        working-directory: ./ # <-- racine
 
       - name: Check for broken links
         run: npx link-checker --url file://$(pwd)/index.html
+        working-directory: ./ # <-- racine
 
       - name: Validate HTML structure
         run: |
@@ -42,6 +45,7 @@ jobs:
             sudo apt-get update && sudo apt-get install -y tidy
             tidy -e index.html 2>&1 | grep -q "No warnings or errors were found" || exit 1
           fi
+        working-directory: ./ # <-- racine
 
   deploy:
     needs: test
