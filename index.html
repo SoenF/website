@@ -140,8 +140,22 @@
 
     <script src="script.js"></script>
   <!-- Botpress Chatbot -->
-    <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js" defer></script>
-    <script src="https://files.bpcontent.cloud/2025/11/16/19/20251116195134-QKQZ52O2.js" defer></script>
+<!-- Botpress Webchat -->
+<script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js" defer></script>
+<script src="https://files.bpcontent.cloud/2025/11/16/19/20251116195134-QKQZ52O2.js" defer></script>
+
+<script>
+  // Ensure Botpress runs only after the page fully loads
+  window.addEventListener('load', function() {
+    if (window.botpressWebChat) {
+      window.botpressWebChat.init({
+        botId: 'YOUR_BOTPRESS_BOT_ID', // optional, some bots require it
+        host: 'https://cdn.botpress.cloud',
+        messagingUrl: 'https://files.bpcontent.cloud/2025/11/16/19/20251116195134-QKQZ52O2.js'
+      });
+    }
+  });
+</script>
 
   </body>
 </html>
