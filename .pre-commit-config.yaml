@@ -37,3 +37,4 @@ repos:
       - id: prettier
         types_or: [text]
         files: \.(html|css|js|json|md|yaml|yml)$
+        exclude: \.html$
