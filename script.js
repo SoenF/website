@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault(); // Prevent default form submission
 
       // Get form values
+      const name = document.getElementById("name").value;
       const email = document.getElementById("email").value;
       const phone = document.getElementById("phone").value || "Not provided";
       const message = document.getElementById("message").value;
@@ -69,13 +70,18 @@ document.addEventListener("DOMContentLoaded", function () {
       formMessage.textContent = "Sending your message...";
       formMessage.style.display = "block";
 
-      // Prepare parameters for EmailJS
+      // Prepare parameters for EmailJS matching your template structure
       const templateParams = {
-        to_email: "flochlay15@gmail.com", // This would be your email
-        from_email: email,
-        phone: phone,
-        message: message,
-        reply_to: email,
+        to_email: "flochlay15@gmail.com", // The email address to send to
+        name: name, // Client's name
+        message: `Email: ${email}\nPhone: ${phone}\n\n${message}`, // Include email and phone in message
+        time: new Date().toLocaleString(), // Timestamp for your template
+        from_email: email, // Client's email
+        phone: phone, // Client's phone number
+        reply_to: email, // Reply-to address
+        email_subject: `New Contact from ${name}`, // Subject for the email
+        client_email: email, // For clear identification in email
+        client_phone: phone, // For clear identification in email
       };
 
       // Send email using EmailJS with your configured credentials
