@@ -193,44 +193,41 @@
   }
 </style>
 
-<!-- Put this on your page BEFORE the script below -->
-<div id="webchat" style="width: 500px; height: 500px;"></div>
 
-<!-- In your <body> tag -->
-<script>
-  window.botpress.on("webchat:ready", () => {
-    window.botpress.open();
-  });
-  window.botpress.init({
-  "botId": "9ac982f0-9ad1-40d7-8865-7f1d032d306c",
-  "configuration": {
-    "version": "v2",
-    "composerPlaceholder": "Hello! I'm your AZUROPS assistant, here to help you with questions about our services, automation, and AI solutions. How can I assist you today?",
-    "botName": "Azur's Chat",
-    "botDescription": "",
-    "website": {},
-    "email": {},
-    "phone": {},
-    "termsOfService": {},
-    "privacyPolicy": {},
-    "color": "#1b406f",
-    "variant": "solid",
-    "headerVariant": "glass",
-    "themeMode": "light",
-    "fontFamily": "inter",
-    "radius": 2,
-    "feedbackEnabled": false,
-    "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-    "soundEnabled": false,
-    "proactiveMessageEnabled": false,
-    "proactiveBubbleMessage": "Hi! 👋 Need help?",
-    "proactiveBubbleTriggerType": "afterDelay",
-    "proactiveBubbleDelayTime": 10
-  },
-  "clientId": "ba538627-9f7a-4627-bf1c-6566611c1965",
-  "selector": "#webchat"
-});
-</script>
+ <button id="openChatBtn">Ouvrir le chat</button>
+
+  <div id="webchat"></div>
+
+  <script>
+    window.botpress.init({
+      "botId": "9ac982f0-9ad1-40d7-8865-7f1d032d306c",
+      "configuration": {
+        "version": "v2",
+        "composerPlaceholder": "Hello! I'm your AZUROPS assistant, here to help you with questions about our services, automation, and AI solutions. How can I assist you today?",
+        "botName": "Azur's Chat",
+        "botDescription": "",
+        "color": "#1b406f",
+        "variant": "solid",
+        "headerVariant": "glass",
+        "themeMode": "light",
+        "fontFamily": "inter",
+        "radius": 2,
+        "feedbackEnabled": false,
+        "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+        "soundEnabled": false,
+        "proactiveMessageEnabled": false
+      },
+      "clientId": "ba538627-9f7a-4627-bf1c-6566611c1965",
+      "selector": "#webchat"
+    });
+
+    window.botpress.on("webchat:ready", () => {
+      const btn = document.getElementById("openChatBtn");
+      btn.addEventListener("click", () => {
+        window.botpress.open();
+      });
+    });
+  </script>
 
   </body>
 </html>
